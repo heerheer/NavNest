@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    image: oven/bun:latest  # 使用官方Bun镜像
+    volumes:
+      - ..:/workspace
+    command: sleep infinity  # 保持容器运行
+    depends_on:
+      - mongo
+    ports:
+      - 3000:3000  # 暴露应用端口
+    environment:
+      MONGO_URI: "mongodb://mongo:27017/mydb"  # 连接MongoDB的环境变量
+
+  mongo:
+    image: mongo:7.0  # 使用MongoDB官方镜像
+    volumes:
+      - mongo-data:/data/db  # 持久化数据
+    ports:
+      - 27017:27017  # 暴露MongoDB端口
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+volumes:
+  mongo-data:

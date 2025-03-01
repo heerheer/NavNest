@@ -1,0 +1,15 @@
+{
+    "name": "Bun with MongoDB",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",  // 主开发容器
+    "workspaceFolder": "/workspace",
+    "forwardPorts": [3000, 27017],  // 转发应用和MongoDB端口
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "oven.bun-vscode"  // 安装Bun的VS Code扩展
+        ]
+      }
+    },
+    "postCreateCommand": "bun install"  // 容器创建后自动安装依赖
+  }
